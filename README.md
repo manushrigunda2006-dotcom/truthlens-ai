@@ -1,472 +1,299 @@
-# 🔍 TruthLens AI
+# TruthLens AI – AI-Powered Fake News & Misinformation Detection System
 
-### AI-Powered Fake News & Misinformation Detection System
+> *"Analyze the claim. Examine the evidence. Understand the context."*
 
-TruthLens AI is an AI-powered platform that helps users analyze news articles, social-media posts, headlines, URLs, and images to identify potentially misleading or false information.
-
-Instead of simply giving a **"Fake" or "Real"** result, TruthLens AI analyzes individual claims, available evidence, source information, language patterns, clickbait indicators, and contextual information to provide an explainable assessment.
-
-> **Analyze the claim. Examine the evidence. Understand the context.**
+TruthLens AI is a production-grade, explainable misinformation analysis platform designed for investigative journalists, fact-checkers, and digital citizens. Rather than returning crude black-box percentages (*"Fake News: 95%"*), TruthLens breaks down articles, social posts, web URLs, and screenshots into atomic claims, audits linguistic manipulation and clickbait urgency, searches for corroborated evidence from primary sources, and presents calibrated confidence assessments with clear uncertainty boundaries.
 
 ---
 
-## 🚀 Features
+## 🌟 Key Features
 
-### 🤖 AI-Powered Analysis
+### 1. Multi-Modal Ingestion
+- **Paste Text**: Analyze full articles, social media posts, headlines, and WhatsApp/Telegram forwards.
+- **Analyze Web URL**: Automated HTML scraping with metadata extraction (Publisher, Author, Publication Date, Domain) and SSRF-safe sanitization.
+- **Upload Image (OCR)**: Extracts high-fidelity text from screenshots (PNG, JPG, JPEG, WEBP) using native Tesseract.js workers. Allows editing extracted text before analysis.
 
-* Analyze news articles and social-media content
-* Extract individual factual claims
-* Classify claims based on available evidence
-* Generate explainable AI assessments
-* Display confidence and uncertainty
+### 2. Explainable Claim-Level Analysis
+- Deconstructs articles into discrete verifiable factual claims.
+- Classifies each claim into calibrated statuses:
+  - `Supported`
+  - `Contradicted`
+  - `Misleading context`
+  - `Unverified`
+  - `Insufficient evidence`
+- Provides explicit *"Why this was flagged"* explainability for every assertion.
 
-### 🔎 Claim Verification
+### 3. Evidence Explorer
+- Dedicated evidence panel categorizing retrieved facts into **Supporting Evidence**, **Contradicting Evidence**, and **Related Reporting**.
+- Explicitly distinguishes between **Retrieved real-world evidence** and **AI model interpretation**.
+- Provides primary links, source names, and publication dates. Never invents citations. Displays *"No sufficient evidence was found"* when records are missing.
 
-* Break articles into individual claims
-* Analyze each claim separately
-* Identify:
+### 4. Source Transparency Audit
+- Evaluates verifiable journalistic hygiene indicators:
+  - Author identified with verifiable byline
+  - Explicit publication date & temporal consistency
+  - Independent sources and peer-reviewed studies cited
+  - Primary references & DOIs linked
+  - Editorial & publisher governance present
+- Avoids domain stereotyping by focusing on measurable structural transparency.
 
-  * ✅ Supported claims
-  * ⚠️ Potentially misleading claims
-  * ❌ Contradicted claims
-  * ❓ Unverified claims
-  * ℹ️ Insufficient evidence
+### 5. Clickbait & Urgency Detector
+- Isolates sensational capitalization, urgency manipulation (*"Before midnight!!"*, *"Hurry before it's taken down"*), curiosity gaps, and manufactured authority panic.
+- Highlights exact flagged phrases.
+- **Methodological core**: Clickbait is emotional packaging and is not automatically treated as factual falsity.
 
-### 📰 Source Analysis
+### 6. Language, Emotion & Framing Analysis
+- Evaluates emotional intensity, fear scores, anger scores, and sensational vocabulary.
+- Reminds users that passionate or emotional language does not equal falsehood.
 
-Analyze available source information such as:
+### 7. Context & Temporal Audit
+- Detects time-gap distortions (e.g. historical 2017 hurricane flooding footage recycled as breaking disaster news today).
 
-* Publisher
-* Author
-* Publication date
-* References and citations
-* Primary-source availability
-* Source transparency indicators
+### 8. Built-in Demo Mode
+- Instant 1-click loading for 5 realistic scenarios:
+  1. **Credible Scientific Discovery** (NASA JWST redshift galaxy confirmation)
+  2. **Misleading Health Claim** (Miracle herb claiming 98% diabetes cure)
+  3. **Unverified Social Panic** (Confidential bank freeze order forward)
+  4. **Clickbait Sensationalism** (Doctors begging to throw away household oil)
+  5. **Decontextualized Outdated News** (Hurricane Harvey flood footage reshared today)
 
-### 📚 Evidence Explorer
-
-For each claim, TruthLens AI can display:
-
-* Supporting evidence
-* Contradicting evidence
-* Related information
-* Publication dates
-* Source references
-
-### 🎯 Clickbait Detection
-
-Detect potential indicators such as:
-
-* Excessive capitalization
-* Sensational wording
-* Emotional manipulation
-* Excessive punctuation
-* Fear-inducing language
-* Unsupported superlatives
-* Urgency manipulation
-
-### 🧠 Explainable AI
-
-Instead of only showing a result, TruthLens AI explains **why** a claim was flagged.
-
-Example indicators:
-
-```text
-• Unsupported factual claim
-• Conflicting available evidence
-• Missing source information
-• Sensational wording
-• Outdated context
-```
-
-### 🌎 Multilingual Support
-
-Supports analysis in:
-
-* 🇬🇧 English
-* 🇮🇳 Hindi
-* ಕನ್ನಡ Kannada
-* తెలుగు Telugu
-* தமிழ் Tamil
-
-### 🖼️ Image Analysis
-
-Upload screenshots or images containing claims.
-
-TruthLens AI can:
-
-1. Extract text using OCR
-2. Allow the user to edit extracted text
-3. Analyze the detected claims
-
-### 🕐 Context Detection
-
-Identify situations where older information may be presented as recent.
-
-The system can compare:
-
-* Publication date
-* Current date
-* Available updates
-* Context surrounding the claim
-
-### 🧩 Claim Dependency Graph
-
-Visualize relationships between:
-
-```text
-Article
-   │
-   ├── Claim 1
-   │     ├── Evidence A
-   │     └── Evidence B
-   │
-   ├── Claim 2
-   │     └── Evidence C
-   │
-   └── Claim 3
-         └── Evidence D
-```
-
-### 🧠 Verification Memory
-
-Previously analyzed claims can be stored and detected when similar claims are submitted again.
-
-Users can compare previous and current analysis.
-
-### 📊 Dashboard
-
-The dashboard provides:
-
-* Total stories analyzed
-* Claims analyzed
-* Unverified claims
-* Reports generated
-* Analysis history
-* Language statistics
-* Assessment statistics
-
-### 📄 Verification Reports
-
-Generate a structured verification report containing:
-
-* Article information
-* Overall assessment
-* Individual claims
-* Evidence
-* Sources
-* Clickbait analysis
-* Language analysis
-* Context analysis
-* Limitations
+### 9. Complete Platform Pages
+- `/` – Premium Hero & Feature Landing Page with live animated dossier preview.
+- `/analyze` – Multi-modal analysis workspace with genuine pipeline progress.
+- `/results/[id]` – Comprehensive verification dossier with interactive claims, feedback widget, and PDF/JSON export.
+- `/dashboard` – Executive telemetry, credibility ratios, and claim breakdown metrics.
+- `/history` – Historical analysis archive with search, assessment filter, and JSON export.
+- `/reports` – Misinformation investigation registry & community issue tracking.
+- `/settings` – API key diagnostic status, OCR engine check, and sensitivity calibration.
+- `/admin` – Moderation queue for flagged reports and custom keyword heuristic rules.
 
 ---
 
-# 🏗️ System Architecture
+## 🏗️ Architecture & Technology Stack
 
-```text
-                    ┌──────────────────┐
-                    │      User        │
-                    └────────┬─────────┘
-                             │
-                             ▼
-                 ┌──────────────────────┐
-                 │   TruthLens Frontend │
-                 │       Next.js        │
-                 └──────────┬───────────┘
-                            │
-                            ▼
-                 ┌──────────────────────┐
-                 │    Analysis Engine   │
-                 └──────────┬───────────┘
-                            │
-             ┌──────────────┼──────────────┐
-             ▼              ▼              ▼
-       ┌──────────┐   ┌──────────┐   ┌──────────┐
-       │ AI / NLP │   │  Claims  │   │ Evidence │
-       │ Analysis │   │Extraction│   │ Retrieval│
-       └──────────┘   └──────────┘   └─────┬────┘
+```
+                               ┌────────────────────────┐
+                               │   User Input / Client  │
+                               │  (Text / URL / Image)  │
+                               └───────────┬────────────┘
                                            │
                                            ▼
-                                  ┌────────────────┐
-                                  │ Source Analysis│
-                                  └───────┬────────┘
-                                          │
-                                          ▼
-                                  ┌────────────────┐
-                                  │ Verification   │
-                                  │ Report         │
-                                  └───────┬────────┘
-                                          │
-                                          ▼
-                                  ┌────────────────┐
-                                  │   PostgreSQL   │
-                                  └────────────────┘
+                               ┌────────────────────────┐
+                               │  Next.js 16 App Router │
+                               │  (React 19, Tailwind)  │
+                               └───────────┬────────────┘
+                                           │
+             ┌─────────────────────────────┼─────────────────────────────┐
+             ▼                             ▼                             ▼
+   ┌───────────────────┐         ┌───────────────────┐         ┌───────────────────┐
+   │ Cheerio Scraper   │         │ Tesseract OCR     │         │ Security & SSRF   │
+   │ (URL Extraction)  │         │ (Image Parsing)   │         │ Input Validation  │
+   └─────────┬─────────┘         └─────────┬─────────┘         └─────────┬─────────┘
+             │                             │                             │
+             └─────────────────────────────┼─────────────────────────────┘
+                                           │
+                                           ▼
+                               ┌────────────────────────┐
+                               │  Multi-Stage Pipeline  │
+                               │  - Language Detection  │
+                               │  - Claim Decomposition │
+                               │  - Clickbait Analysis  │
+                               │  - Source Audit        │
+                               │  - Context Analysis    │
+                               └───────────┬────────────┘
+                                           │
+                 ┌─────────────────────────┴─────────────────────────┐
+                 ▼                                                   ▼
+       ┌───────────────────┐                               ┌───────────────────┐
+       │ AI Engine Router  │                               │ Evidence Service  │
+       │ - Gemini 1.5      │                               │ - Tavily Search   │
+       │ - OpenAI GPT-4o   │                               │ - Serper Search   │
+       │ - Local Heuristics│                               │ - Verified Repo   │
+       └─────────┬─────────┘                               └─────────┬─────────┘
+                 │                                                   │
+                 └─────────────────────────┬─────────────────────────┘
+                                           │
+                                           ▼
+                               ┌────────────────────────┐
+                               │  Prisma ORM (v6.4.1)   │
+                               │  (SQLite / PostgreSQL) │
+                               └───────────┬────────────┘
+                                           │
+                                           ▼
+                               ┌────────────────────────┐
+                               │  Verification Dossier  │
+                               │  & Executive Telemetry │
+                               └────────────────────────┘
 ```
 
----
-
-# 🛠️ Tech Stack
-
-### Frontend
-
-* Next.js
-* React
-* TypeScript
-* Tailwind CSS
-* shadcn/ui
-* Lucide Icons
-* Recharts
-
-### Backend
-
-* Next.js API Routes
-* REST APIs
-* AI/NLP services
-
-### Database
-
-* PostgreSQL
-* Prisma / Drizzle ORM
-
-### AI
-
-* Large Language Models
-* NLP
-* Claim extraction
-* Text classification
-* Explainable analysis
-
-### Image Processing
-
-* OCR
-* Image text extraction
+- **Frontend**: Next.js 16.3.5, React 19, TypeScript, Tailwind CSS v4, Lucide React.
+- **Backend / APIs**: Next.js App Router Route Handlers.
+- **Database & ORM**: Prisma 6.4.1 with SQLite (default zero-config local) & PostgreSQL compatibility.
+- **AI & NLP**: Multi-provider architecture (Google Gemini 1.5, OpenAI GPT-4o Mini, and resilient TruthLens Heuristic NLP Engine).
+- **OCR**: Tesseract.js v7.
+- **Web Extraction**: Cheerio with SSRF protection guards.
 
 ---
 
-# 📂 Project Structure
+## 📁 Folder Structure
 
-```text
+```
 truthlens-ai/
-│
-├── app/
-│   ├── page.tsx
-│   ├── analyze/
-│   ├── results/
-│   ├── dashboard/
-│   ├── history/
-│   ├── reports/
-│   ├── settings/
-│   ├── admin/
-│   └── api/
-│
-├── components/
-│   ├── analyzer/
-│   ├── claims/
-│   ├── evidence/
-│   ├── source/
-│   ├── dashboard/
-│   └── ui/
-│
-├── lib/
-│   ├── ai/
-│   ├── database/
-│   ├── evidence/
-│   └── analysis/
-│
-├── public/
-│
 ├── prisma/
-│
-├── .env.example
-├── package.json
-├── README.md
-└── tsconfig.json
+│   ├── schema.prisma            # Prisma schema (User, Analysis, Claim, Evidence, Source, Feedback, Report)
+│   └── dev.db                   # SQLite database file
+├── src/
+│   ├── app/
+│   │   ├── admin/page.tsx       # Admin Operations Center & Moderation Queue
+│   │   ├── analyze/page.tsx     # Multi-Modal Story Analyzer Workspace
+│   │   ├── dashboard/page.tsx   # Executive Intelligence Telemetry Dashboard
+│   │   ├── history/page.tsx     # Past Analyses Archive with Search & Filter
+│   │   ├── reports/page.tsx     # Community Misinformation Investigation Dossiers
+│   │   ├── results/[id]/page.tsx# Comprehensive Verification Report
+│   │   ├── settings/page.tsx    # Engine & Provider Diagnostic Settings
+│   │   ├── api/
+│   │   │   ├── analysis/[id]/   # GET / DELETE individual analysis
+│   │   │   ├── analyze/         # POST multi-stage analysis pipeline
+│   │   │   ├── claims/similar/  # POST similar claim deduplication
+│   │   │   ├── extract-url/     # POST SSRF-safe URL scraping
+│   │   │   ├── feedback/        # POST user evaluation & accuracy rating
+│   │   │   ├── history/         # GET paginated history
+│   │   │   ├── ocr/             # POST Tesseract image text extraction
+│   │   │   ├── report/          # POST/GET/PATCH moderation issue reports
+│   │   │   ├── settings/        # GET provider telemetry & database status
+│   │   │   └── stats/           # GET executive metrics & ratios
+│   │   ├── globals.css          # Dark Navy theme, glassmorphism, radar grids
+│   │   ├── layout.tsx           # Global HTML layout & metadata
+│   │   └── page.tsx             # Landing Page with 8 feature sections
+│   ├── components/
+│   │   ├── Navbar.tsx           # Responsive Dark Navy navigation bar
+│   │   ├── Footer.tsx           # Footer with ethical AI disclaimers
+│   │   └── ui/
+│   │       └── badges.tsx       # Assessment & Claim status badge components
+│   ├── lib/
+│   │   ├── ai-service.ts        # Unified AI Engine (Gemini, OpenAI, Local Heuristics)
+│   │   ├── demo-data.ts         # 5 comprehensive realistic benchmark datasets
+│   │   ├── evidence-service.ts  # Cross-source evidence retrieval abstraction
+│   │   ├── extractor.ts         # Cheerio-based article extractor with SSRF security
+│   │   ├── ocr.ts               # Tesseract.js worker initialization
+│   │   └── prisma.ts            # Prisma singleton client
+│   └── types/
+│       └── index.ts             # Strict TypeScript models & Zod validation schemas
+├── .env                         # Local environment configuration
+├── .env.example                 # Documented template for deployment
+├── package.json                 # Dependencies & scripts
+└── tsconfig.json                # TypeScript configuration
 ```
 
 ---
 
-# ⚙️ Installation
+## ⚙️ Environment Variables
 
-## 1. Clone the repository
-
-```bash
-git clone https://github.com/YOUR_USERNAME/truthlens-ai.git
-```
-
-## 2. Navigate into the project
+Copy `.env.example` to `.env`:
 
 ```bash
-cd truthlens-ai
+cp .env.example .env
 ```
 
-## 3. Install dependencies
+| Variable | Description | Required? | Default |
+| :--- | :--- | :--- | :--- |
+| `DATABASE_URL` | Prisma database URL | Yes | `"file:./dev.db"` |
+| `GEMINI_API_KEY` | Google Gemini API Key | Optional | `""` (Falls back to Local Engine) |
+| `OPENAI_API_KEY` | OpenAI API Key | Optional | `""` (Falls back to Local Engine) |
+| `TAVILY_API_KEY` | Tavily Fact Search API | Optional | `""` (Uses Verified Fact Repo) |
+| `SERPER_API_KEY` | Serper Search API | Optional | `""` |
+| `ADMIN_SECRET_KEY`| Admin console secret passkey | Optional | `"truthlens-admin-secret-2026"` |
 
+*Note: TruthLens AI functions 100% out of the box even without any external API keys thanks to the integrated high-fidelity rule and heuristic NLP engine!*
+
+---
+
+## 🚀 Quickstart & Local Installation
+
+### Prerequisites
+- Node.js v18.0 or higher
+- npm or pnpm or bun
+
+### 1. Install Dependencies
 ```bash
 npm install
 ```
 
-## 4. Configure environment variables
-
-Create a `.env.local` file:
-
-```env
-AI_API_KEY=your_api_key
-DATABASE_URL=your_database_url
-EVIDENCE_API_KEY=your_api_key
+### 2. Initialize Database
+Generate Prisma client and initialize the SQLite database:
+```bash
+npx prisma db push
 ```
 
-Never commit `.env.local` or API keys to GitHub.
-
-## 5. Run the development server
-
+### 3. Run Development Server
 ```bash
 npm run dev
 ```
 
-Open:
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-```text
-http://localhost:3000
+---
+
+## 🧪 Testing
+
+Build and type-check the entire application:
+```bash
+npm run build
+```
+
+Run in production mode:
+```bash
+npm run start
 ```
 
 ---
 
-# 🔄 How It Works
+## 📡 API Reference
 
-```text
-1. User submits content
-          ↓
-2. Content is extracted
-          ↓
-3. Language is detected
-          ↓
-4. Claims are extracted
-          ↓
-5. AI analyzes the claims
-          ↓
-6. Available evidence is retrieved
-          ↓
-7. Sources are analyzed
-          ↓
-8. Context is checked
-          ↓
-9. Results are generated
-          ↓
-10. Verification report is displayed
+### `POST /api/analyze`
+Submits text, URL, or image OCR for claim extraction and verification.
+```json
+{
+  "text": "Full article or claim text to verify...",
+  "inputMode": "text",
+  "isDemo": false
+}
 ```
 
----
-
-# 📊 Example Analysis
-
-### Input
-
-```text
-Scientists have discovered a new technology that can
-produce unlimited electricity completely free of cost.
+### `POST /api/extract-url`
+Extracts title, byline, publisher, and body text from a webpage URL with SSRF guards.
+```json
+{
+  "url": "https://example.com/news/article"
+}
 ```
 
-### TruthLens Analysis
+### `POST /api/ocr`
+Uploads a screenshot (`multipart/form-data` with `image` field) and extracts text via Tesseract.js.
 
-```text
-Overall Assessment:
-Potentially Misleading
+### `GET /api/analysis/:id`
+Retrieves a full verification dossier by unique ID.
 
-Claim:
-"Technology can produce unlimited electricity completely free."
+### `GET /api/history`
+Lists past verification analyses with search query, assessment filters, and pagination.
 
-Status:
-Unverified
+### `POST /api/feedback`
+Submits user evaluation (`helpful`, `unhelpful`, `accurate`, `inaccurate`) on a verification report.
 
-Potential Indicators:
-• Extraordinary claim
-• No identifiable source
-• Unsupported absolute statement
-• Requires additional evidence
-
-Recommendation:
-Verify the claim using authoritative scientific sources.
-```
-
-The system should not treat this analysis as definitive proof. It is designed to help users investigate information.
+### `POST /api/report`
+Flags an analysis for human fact-checker investigation.
 
 ---
 
-# 🔐 Security
+## 🛡️ Responsible AI Principles
 
-TruthLens AI follows basic security practices including:
-
-* Environment variables for API keys
-* Server-side API calls
-* Input validation
-* File upload restrictions
-* URL validation
-* Authentication and authorization
-* Error handling
-* Rate limiting where applicable
+1. **Never returns binary true/false verdicts**: AI models make probabilistic inferences, not infallible judgments.
+2. **Clear uncertainty labeling**: Confidence numbers explicitly denote algorithmic certainty rather than ontological truth.
+3. **Evidence ground truth**: Distinguishes between verifiable quotes from primary sources and machine reasoning.
+4. **Clickbait disambiguation**: Avoids conflating sensational headlines with malicious falsehoods.
 
 ---
 
-# ⚠️ Disclaimer
+## 📜 License
 
-TruthLens AI provides **automated analysis and research assistance**.
-
-An AI classification is not definitive proof that information is true or false. Users should verify important claims using reliable, authoritative, and preferably primary sources.
-
----
-
-# 🔮 Future Improvements
-
-* Browser extension
-* WhatsApp message analysis
-* Telegram content analysis
-* Real-time misinformation monitoring
-* Advanced image verification
-* Video misinformation detection
-* Deepfake detection
-* More regional languages
-* Improved claim databases
-* Community verification
-* Mobile application
-* Fact-checking organization integrations
-
----
-
-# 🎯 Use Cases
-
-TruthLens AI can be useful for:
-
-* Students
-* Journalists
-* Researchers
-* Content creators
-* Social-media users
-* Educators
-* Fact-checking workflows
-* Digital literacy programs
-
----
-
-# 🏆 Hackathon Project
-
-TruthLens AI is designed as a hackathon-ready solution addressing the growing challenge of misinformation across digital platforms.
-
-The project focuses on:
-
-**AI + NLP + Evidence Retrieval + Explainable AI + Digital Literacy**
-
----
-
-# 👨‍💻 Development
-
-Built with modern web technologies and AI-powered analysis.
-
-```text
-TruthLens AI
-Analyze the claim.
-Examine the evidence.
-Understand the context.
-```
-
-⭐ If you find the project useful, consider giving the repository a star.
+MIT License. Developed for open-source verification and hackathon demonstration.

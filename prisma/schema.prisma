@@ -1,0 +1,124 @@
+// Prisma schema for TruthLens AI
+// AI-Powered Fake News & Misinformation Detection System
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String     @id @default(uuid())
+  email     String?    @unique
+  name      String?
+  role      String     @default("user") // "user" | "analyst" | "admin"
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  analyses  Analysis[]
+  feedback  Feedback[]
+  reports   Report[]
+}
+
+model Analysis {
+  id                 String     @id @default(uuid())
+  userId             String?
+  user               User?      @relation(fields: [userId], references: [id], onDelete: SetNull)
+  inputMode          String     // "text" | "url" | "image"
+  rawInput           String     // Original input or OCR text
+  title              String?
+  url                String?
+  publisher          String?
+  author             String?
+  publicationDate    DateTime?
+  language           String     @default("English")
+  overallAssessment  String     // "Likely credible" | "Potentially misleading" | "Likely false" | "Insufficient evidence"
+  confidence         Float      // 0.0 - 1.0 AI confidence
+  summary            String     // Explainable reasoning summary
+  clickbaitScore     Float?     // 0.0 - 1.0
+  clickbaitDetails   String?    // JSON stringified details
+  languageAnalysis   String?    // JSON stringified details
+  sourceAnalysis     String?    // JSON stringified details
+  contextCheck       String?    // JSON stringified details
+  limitations        String?    // JSON stringified array of caveats
+  isDemo             Boolean    @default(false)
+  createdAt          DateTime   @default(now())
+  updatedAt          DateTime   @updatedAt
+  claims             Claim[]
+  feedback           Feedback[]
+  reports            Report[]
+}
+
+model Claim {
+  id          String     @id @default(uuid())
+  analysisId  String
+  analysis    Analysis   @relation(fields: [analysisId], references: [id], onDelete: Cascade)
+  claimNumber Int
+  claimText   String
+  status      String     // "Supported" | "Contradicted" | "Unverified" | "Misleading context" | "Insufficient evidence"
+  confidence  Float      // 0.0 - 1.0
+  explanation String     // Why this was flagged
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  evidences   Evidence[]
+}
+
+model Evidence {
+  id              String    @id @default(uuid())
+  claimId         String
+  claim           Claim     @relation(fields: [claimId], references: [id], onDelete: Cascade)
+  type            String    // "supporting" | "contradicting" | "related"
+  title           String
+  snippet         String
+  url             String?
+  sourceId        String?
+  source          Source?   @relation(fields: [sourceId], references: [id], onDelete: SetNull)
+  publicationDate DateTime?
+  isAIGenerated   Boolean   @default(false) // Discard simulated or explicitly label retrieved vs AI interpretation
+  confidence      Float?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+}
+
+model Source {
+  id                String     @id @default(uuid())
+  name              String
+  domain            String?
+  author            String?
+  credibilityNote   String?
+  transparencyScore Float?    // 0.0 - 1.0
+  hasAuthor         Boolean    @default(false)
+  hasDate           Boolean    @default(false)
+  hasCitations      Boolean    @default(false)
+  hasPrimarySources Boolean    @default(false)
+  hasEditorialInfo  Boolean    @default(false)
+  createdAt         DateTime   @default(now())
+  updatedAt         DateTime   @updatedAt
+  evidences         Evidence[]
+}
+
+model Feedback {
+  id         String   @id @default(uuid())
+  analysisId String
+  analysis   Analysis @relation(fields: [analysisId], references: [id], onDelete: Cascade)
+  userId     String?
+  user       User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  rating     String   // "helpful" | "unhelpful" | "accurate" | "inaccurate"
+  comments   String?
+  createdAt  DateTime @default(now())
+}
+
+model Report {
+  id         String   @id @default(uuid())
+  analysisId String
+  analysis   Analysis @relation(fields: [analysisId], references: [id], onDelete: Cascade)
+  userId     String?
+  user       User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  reason     String   // "misinformation" | "hate_speech" | "copyright" | "flawed_analysis" | "other"
+  details    String
+  status     String   @default("pending") // "pending" | "reviewed" | "resolved" | "dismissed"
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
